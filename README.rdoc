@@ -1,0 +1,16 @@
+## Objectives
+Use the locals keyword
+Understand why using instance variables in partials is bad
+Use a partial iterating over a collection passing in the local
+Use a partial form another controller with a local
+
+## Introduction
+
+So as you know, with partials we break our code into chunks which then make it easier to reuse these chunks in different contexts.
+If you look at the code base .
+
+ When breaking code into chunks, we also want to be very explicit about the dependencies in our code.  A dependency of code is information or data that the code requires in order to work.
+
+Let's take another look at partials, this time paying special attention to the dependencies of each partial, and how not being explicit about them can get us into trouble.
+
+So if you do @user.posts and pass it into the posts partial, otherwise you have to @posts and @user
