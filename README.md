@@ -210,4 +210,4 @@ And don't forget the authors show page, which we need to change to:
 So, whenever our partial depends on data, we don't want that partial to access the data from an instance variable directly from the controller.  Instead, always pass through the data with locals.  It makes our dependencies more explicit, can reduce lines of code in the controller, and allows us to use block variables when iterating through a collection.
 
 ## Resources
-(RailsGuides)[http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials]
+[RailsGuides](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials)
