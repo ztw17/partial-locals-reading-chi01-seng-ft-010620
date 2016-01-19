@@ -1,6 +1,8 @@
 <%= @posts.each do |post| %>
-  <%= @author.name %>
-  <%= @author.title %>
-  <%= @post.title %>
-  <%= @post.content %>
+<ul>
+  <li> <%= post.author.name %></li>
+  <li> <%= post.author.hometown %></li>
+</ul>
+  <%= post.title %>
+  <%= post.content %>
 <% end %>
