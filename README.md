@@ -128,7 +128,7 @@ Information About the Post
 <%= @post.content %>
 ```
 
-This code is .  We are being more explicit in our code about the dependencies, we are reducing lines of code in our codebase, and we are reducing the scope that our author data is exposed.
+This code is much better.  We are being more explicit about our dependencies, reducing lines of code in our codebase, and reducing the scope of the author variable.
 Don't worry if you find the syntax for rendering a partial hard to remember - it is.  You can always re-reference this guide or use the Rails Guides.
 
 ## Resources
