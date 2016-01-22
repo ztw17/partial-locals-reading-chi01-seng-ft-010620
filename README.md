@@ -6,9 +6,12 @@
 
 ## Introduction
 
-So as you know, with partials we break our code into chunks which then make it easier to reuse these chunks in different contexts. What I am going to try to convince you of in this article, is that whenever our partial depends on data to run, we should always pass through that data using locals.
-In the following, we'll see what that sentence means, and how to write using local variables.
-So, if you look at the code base, you'll see the same piece of code regarding authors repeated.
+Partials help us break our code up into reusable chunks.  They also often have implicit dependencies that can lead to bugs.  To make the implicit explicit, use locals whenever your partials depenend on data to work.
+In the following example, we'll unpack exactly what locals are and how they're used.
+
+## Lesson
+
+Take a look at the included repo.  You should notice the same piece of view code in a few places.
 
 ```erb
 <ul>
@@ -16,10 +19,10 @@ So, if you look at the code base, you'll see the same piece of code regarding au
   <li> <%= @author.hometown %></li>
 </ul>
 ```
-We will find that code (or very similar code) in the following pages: `app/views/authors/show.html.erb`, `app/views/authors/index.html.erb`, `app/views/posts/show.html.erb`.
+You'll find that code (or very similar code) in the following pages: `app/views/authors/show.html.erb`, `app/views/authors/index.html.erb`, `app/views/posts/show.html.erb`.
 
-Looks like we got some work to do.  So let's start with the author show page.  
-Let's remove the code from our `app/views/authors/show.html.erb` page.  So now our file should be empty:
+Looks like we've got some work to do.  Let's start with the author show page.  
+Let's remove the code from our `app/views/authors/show.html.erb` page.  Now our file should be empty:
 `app/views/authors/show.html.erb`
 ```
 
@@ -33,11 +36,11 @@ We can move the removed code into a partial `app/views/authors/_author.html.erb`
 </ul>
 ```
 
-So now to keep our code in the show page rendering out the same content, we call the partial from the `app/views/authors/show.html.erb` file.  Doing this, the `app/views/authors/show.html.erb` file now looks like the following.
+To keep our code in the show page rendering out the same content, we call the partial from the `app/views/authors/show.html.erb` file.  Doing this, the `app/views/authors/show.html.erb` file now looks like the following.
 ```erb
 <%= render 'author' %>
 ```
-Great! So, now let's take a look at the `app/views/posts/show.html.erb` file.  It currently looks like the following:
+Great! Now let's take a look at the `app/views/posts/show.html.erb` file.  It currently looks like the following:
 
 `app/views/posts/show.html.erb`
 ```erb
@@ -50,7 +53,7 @@ Information About the Post
 <%= @post.content %>
 ```
 
-So you can see that the first two lines are exactly the same as the code in our authors/author partial.  Let's remove the repetition in our codebase by using that partial instead.  By using the partial, our code will look like the following:
+You can see that the first two lines are exactly the same as the code in our authors/author partial.  Let's remove the repetition in our codebase by using that partial instead.  By using the partial, our code will look like the following:
 
 `app/views/posts/show.html.erb`
 ```erb
@@ -62,13 +65,13 @@ Information About the Post
 
 Note that because we are calling a partial from outside the current `app/views/posts` folder, we must specify the folder that our author partial is coming from by calling `render 'authors/author'`.
 
-This code may look ok at first, but it poses some problems.  The reason why is because when calling the partial authors/author, we are not being explicit about that partial's dependencies.
-A dependency of code is information or data that the code requires in order to work.  So in this case, the dependency of the author partial is the instance variable @author.  Without that instance variable, the code won't work.  But unfortunately, that dependency is defined far away in the controller.
-This is not so hot.  Here's why: let's say our team's designer comes along and tells us we no longer want to display author information with each post - just the post itself.
-Ok, so we just delete the line `<%= render 'authors/author' %>` right? Well, unfortunately, we forgot to remove the @author instance variable in the controller as well, because the dependency was not explicit.  This mistake likely would have been avoided if whenever we called the partial,
-we also specified the data that the code relied on by passing through local variables.  
+This code may look ok at first, but it poses some problems.  When we render the partial authors/author, we are not being explicit about that partial's dependencies.
+A dependency is data that the code requires in order to work (like passing a variable into a method).  In this case, the dependency of the author partial is the instance variable @author.  Without that instance variable, the code won't work.  Unfortunately, that dependency is defined far away in the controller.
+This is not so hot.  Imagine that our team's designer tells us we no longer want to display author information with each post - just the post itself.
+We can just delete the line `<%= render 'authors/author' %>` right? Unfortunately, we forgot to remove the @author instance variable in the controller as well, because the dependency was not explicit.  This mistake likely would have been avoided if whenever we called the partial,
+we also specified the data that the code relied on by passing through local variables.
 
-Cool, so let's now see how local variables make our code more explicit.  
+Let's see how local variables make our code more explicit.
 This is what the entire show view looks like:
 `app/views/posts/show.html.erb`
 ```erb
@@ -78,7 +81,7 @@ Information About the Post
 <%= @post.content %>
 ```
 
-So notice that rendering the authors/author partial without passing through local variables the second line of code looked like `<%= render 'authors/author' %>`.  And now with passing through locals: `<%= render {partial: "authors/author", locals: {post_author: @author}} %>`.
+Notice that rendering the authors/author partial without passing through local variables the second line of code looked like `<%= render 'authors/author' %>`.  Now with passing through locals: `<%= render {partial: "authors/author", locals: {post_author: @author}} %>`.
 
 Notice a few things.  First, we are no longer passing the render method a string, now we're passing a hash.  That hash two key value pairs.  
 
@@ -109,7 +112,7 @@ Now notice that if we choose to delete the line `<%= render {partial: "authors/a
 
 In fact, with locals, we can eliminate `@author = @post.author` line in the `posts#show` action in the controller completely, by instead only accessing that data in where we need it, in the partial.
 
-So let's remove that line of code in our controller, and in the view pass through the author information by changing our code to the following:
+Let's remove that line of code in our controller, and in the view pass through the author information by changing our code to the following:
 
 `app/controllers/posts_controller`
 ```ruby
