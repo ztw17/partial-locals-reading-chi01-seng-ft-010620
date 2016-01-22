@@ -10,7 +10,7 @@ So as you know, with partials we break our code into chunks which then make it e
 In the following, we'll see what that sentence means, and how to write using local variables.
 So, if you look at the code base, you'll see the same piece of code regarding authors repeated.
 
-```
+```erb
 <ul>
   <li> <%= @author.name %></li>
   <li> <%= @author.hometown %></li>
@@ -26,7 +26,7 @@ Let's remove the code from our `app/views/authors/show.html.erb` page.  So now o
 ```
 We can move the removed code into a partial `app/views/authors/_author.html.erb` that now has the following code.
 `app/views/authors/_author.html.erb`
-```
+```erb
 <ul>
   <li> <%= @author.name %></li>
   <li> <%= @author.hometown %></li>
@@ -34,13 +34,13 @@ We can move the removed code into a partial `app/views/authors/_author.html.erb`
 ```
 
 So now to keep our code in the show page rendering out the same content, we call the partial from the `app/views/authors/show.html.erb` file.  Doing this, the `app/views/authors/show.html.erb` file now looks like the following.
-```
+```erb
 <%= render 'author' %>
 ```
 Great! So, now let's take a look at the `app/views/posts/show.html.erb` file.  It currently looks like the following:
 
 `app/views/posts/show.html.erb`
-```
+```erb
 Information About the Post
 <ul>
   <li> <%= @author.name %></li>
@@ -53,7 +53,7 @@ Information About the Post
 So you can see that the first two lines are exactly the same as the code in our authors/author partial.  Let's remove the repetition in our codebase by using that partial instead.  By using the partial, our code will look like the following:
 
 `app/views/posts/show.html.erb`
-```
+```erb
 Information About the Post
 <%= render 'authors/author' %>
 <%= @post.title %>
@@ -71,9 +71,9 @@ we also specified the data that the code relied on by passing through local vari
 Cool, so let's now see how local variables make our code more explicit.  
 This is what the entire show view looks like:
 `app/views/posts/show.html.erb`
-```
+```erb
 Information About the Post
-<%= render {partial: "authors/author", locals: {post_author: @author}} %>
+<%= render partial: "authors/author", locals: {post_author: @author} %>
 <%= @post.title %>
 <%= @post.content %>
 ```
@@ -87,7 +87,7 @@ The first key value pair tells rails the name of the partial to render.  The sec
 When we use locals we need to make sure that the variables we refer to in our partial have the same names as the keys in our locals hash.
 
 In our example, the partial `app/views/author/_author.html.erb` we need to change our code from:
-```
+```erb
 <ul>
   <li> <%= @author.name %></li>
   <li> <%= @author.hometown %></li>
@@ -96,7 +96,7 @@ In our example, the partial `app/views/author/_author.html.erb` we need to chang
 
 to
 `app/views/author/_author.html.erb`
-```
+```erb
 <ul>
   <li> <%= post_author.name %></li>
   <li> <%= post_author.hometown %></li>
@@ -112,7 +112,7 @@ In fact, with locals, we can eliminate `@author = @post.author` line in the `pos
 So let's remove that line of code in our controller, and in the view pass through the author information by changing our code to the following:
 
 `app/controllers/posts_controller`
-```
+```ruby
   ...
   def show
     @post = Post.find(params[:id])
@@ -121,14 +121,14 @@ So let's remove that line of code in our controller, and in the view pass throug
 ```
 
 `app/views/posts/show.html.erb`
-```
+```erb
 Information About the Post
-<%= render {partial: "authors/author", locals: {post_author: @post.author}} %>
+<%= render partial: "authors/author", locals: {post_author: @post.author} %>
 <%= @post.title %>
 <%= @post.content %>
 ```
 
-Now that's some good stuff right there.  We are being more explicit in our code about the dependencies, we are reducing lines of code in our codebase, and we are reducing the scope that our author data is exposed.
+This code is .  We are being more explicit in our code about the dependencies, we are reducing lines of code in our codebase, and we are reducing the scope that our author data is exposed.
 Don't worry if you find the syntax for rendering a partial hard to remember - it is.  You can always re-reference this guide or use the Rails Guides.
 
 ## Resources
