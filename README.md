@@ -138,3 +138,5 @@ Don't worry if you find the syntax for rendering a partial hard to remember - it
 
 ## Resources
 [RailsGuide: Partials](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials)
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/partial-locals-reading' title='Partials with Locals'>Partials with Locals</a> on Learn.co and start learning to code for free.</p>
