@@ -8,7 +8,7 @@
 
 ## Introduction
 
-Partials help us break our code up into reusable chunks.  They also often have implicit dependencies that can lead to bugs.  To make the implicit explicit, use locals whenever your partials depenend on data to work.
+Partials help us break our code up into reusable chunks.  They also often have implicit dependencies that can lead to bugs.  To make the implicit explicit, use locals whenever your partials depend on data to work.
 In the following example, we'll unpack exactly what locals are and how they're used.
 
 ## Lesson
@@ -140,3 +140,5 @@ Don't worry if you find the syntax for rendering a partial hard to remember - it
 [RailsGuide: Partials](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials)
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/partial-locals-reading' title='Partials with Locals'>Partials with Locals</a> on Learn.co and start learning to code for free.</p>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/partial-locals-reading'>Partial with Locals </a> on Learn.co and start learning to code for free.</p>
