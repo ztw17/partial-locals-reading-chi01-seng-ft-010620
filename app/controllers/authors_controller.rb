@@ -1,9 +1,9 @@
 class AuthorsController < ApplicationController
   def show
-    @post = Author.find(params[:id])
+    @author = Author.find(params[:id])
   end
 
   def index
-    @posts = Author.all
+    @authors = Author.all
   end
 end
