@@ -85,7 +85,7 @@ Information About the Post
 
 Notice that rendering the authors/author partial without passing through local variables the second line of code looked like `<%= render 'authors/author' %>`.  Now with passing through locals: `<%= render {partial: "authors/author", locals: {post_author: @author}} %>`.
 
-Notice a few things.  First, we are no longer passing the render method a string, now we're passing a hash.  That hash two key value pairs.  
+Notice a few things.  First, we are no longer passing the render method a string, now we're passing a hash.  That hash has two key value pairs.  
 
 The first key value pair tells rails the name of the partial to render.  The second key-value pair contains a key of locals which points to a hash of variables to pass into the partial.  The key is the name of the variable and its value is the value you'd like it to have in the parial.  For the values of your locals, you can use instance variables set in the controller.
 
@@ -108,7 +108,7 @@ to
 </ul>
 ```
 
-In other words, the way we use locals with a partial is similar to how we pass arguments into a method.  In the locals hash {post_author: @author}, the key to the hash, is the argument name, and the value of that argument is the corresponding value to the key.  We can name the key's whatever we want (and would probably name it author in a real application, but we wanted to demonstrate that name of the key has no special powers.
+In other words, the way we use locals with a partial is similar to how we pass arguments into a method.  In the locals hash {post_author: @author}, the key to the hash, is the argument name, and the value of that argument is the corresponding value to the key.  We can name the keys whatever we want (and would probably name it author in a real application), but we wanted to demonstrate that name of the key has no special powers.
 
 Now notice that if we choose to delete the line `<%= render {partial: "authors/author", locals: {post_author: @author}} %>` from the authors/show view, we will also see that calling the partial required me to pass in data about the author, and that line in our controller may no longer be needed.
 
