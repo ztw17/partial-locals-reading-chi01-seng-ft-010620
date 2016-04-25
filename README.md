@@ -110,7 +110,7 @@ to
 
 In other words, the way we use locals with a partial is similar to how we pass arguments into a method.  In the locals hash {post_author: @author}, the key to the hash, is the argument name, and the value of that argument is the corresponding value to the key.  We can name the keys whatever we want (and would probably name it author in a real application), but we wanted to demonstrate that name of the key has no special powers.
 
-Now notice that if we choose to delete the line `<%= render {partial: "authors/author", locals: {post_author: @author}} %>` from the authors/show view, we will also see that calling the partial required me to pass in data about the author, and that line in our controller may no longer be needed.
+Now notice that if we choose to delete the line `<%= render {partial: "authors/author", locals: {post_author: @author}} %>` from the posts/show view, we will also see that calling the partial required me to pass in data about the author, and that line in our controller may no longer be needed.
 
 In fact, with locals, we can eliminate `@author = @post.author` line in the `posts#show` action in the controller completely, by instead only accessing that data in where we need it, in the partial.
 
@@ -142,3 +142,5 @@ Don't worry if you find the syntax for rendering a partial hard to remember - it
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/partial-locals-reading' title='Partials with Locals'>Partials with Locals</a> on Learn.co and start learning to code for free.</p>
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/partial-locals-reading'>Partial with Locals </a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/partial-locals-reading'>Partial with Locals </a> on Learn.co and start learning to code for free.</p>
