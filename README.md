@@ -87,7 +87,7 @@ Notice that rendering the authors/author partial without passing through local v
 
 Notice a few things.  First, we are no longer passing the render method a string, now we're passing a hash.  That hash has two key value pairs.  
 
-The first key value pair tells rails the name of the partial to render.  The second key-value pair contains a key of locals which points to a hash of variables to pass into the partial.  The key is the name of the variable and its value is the value you'd like it to have in the parial.  For the values of your locals, you can use instance variables set in the controller.
+The first key value pair tells rails the name of the partial to render.  The second key-value pair contains a key of locals which points to a hash of variables to pass into the partial.  The key is the name of the variable and its value is the value you'd like it to have in the partial.  For the values of your locals, you can use instance variables set in the controller.
 
 When we use locals we need to make sure that the variables we refer to in our partial have the same names as the keys in our locals hash.
 
