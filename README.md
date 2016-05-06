@@ -4,7 +4,7 @@
 1. Use the locals keyword
 2. Understand why using instance variables in partials is bad
 3. Use a partial while rendering a collection
-4. Use a partial form another controller with a local
+4. Use a partial from another controller with a local
 
 ## Introduction
 
