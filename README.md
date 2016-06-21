@@ -83,7 +83,7 @@ Information About the Post
 <%= @post.content %>
 ```
 
-Notice that rendering the authors/author partial without passing through local variables the second line of code looked like `<%= render 'authors/author' %>`.  Now with passing through locals: `<%= render {partial: "authors/author", locals: {post_author: @author}} %>`.
+Notice that rendering the authors/author partial without passing through local variables the second line of code looked like `<%= render 'authors/author' %>`.  Now with passing through locals: `<%= render partial: "authors/author", locals: {post_author: @author} %>`.
 
 Notice a few things.  First, we are no longer passing the render method a string, now we're passing a hash.  That hash has two key value pairs.  
 
