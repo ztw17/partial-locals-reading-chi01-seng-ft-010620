@@ -33,6 +33,7 @@ You'll find that code (or very similar code) in the following pages:
 * `app/views/authors/show.html.erb`
 * `app/views/authors/index.html.erb`
 * `app/views/posts/show.html.erb`.
+* `app/views/posts/index.html.erb`.
 
 Let's see how we might be vulnerable to bugs. In this `<ul>` we ***assume***
 that there will be a controller-set variable, `@author`. But what if that
@@ -45,7 +46,8 @@ what we want to be _flexible_ is the "thing" that we invoke `.name` and
 > **ASIDE**: This should recall the "why do methods have arguments and
 > parameters" discussion from when you were learning to write methods.
 
-Let's start with the author show page.  
+Let's start with the author show page.  Watch our _process_ here as we're going
+to apply it to all views that reference this `name` and `hometown` information.
 
 Let's remove the code from our `app/views/authors/show.html.erb` page.  Now our
 file should be empty: `app/views/authors/show.html.erb`
