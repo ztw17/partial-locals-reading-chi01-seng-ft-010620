@@ -50,12 +50,18 @@ Let's start with the author show page.  Watch our _process_ here as we're going
 to apply it to all views that reference this `name` and `hometown` information.
 
 Let's remove the code from our `app/views/authors/show.html.erb` page.  Now our
-file should be empty: `app/views/authors/show.html.erb`
+file should be empty: 
+
+```erb
+<!-- app/views/authors/show.html.erb -->
 
 ```
-We can move the removed code into a partial, `app/views/authors/_author.html.erb`, that now has the following code.
-`app/views/authors/_author.html.erb`
+
+We can move the removed code into a partial, `app/views/authors/_author.html.erb`, that now has the following code:
+
 ```erb
+<!-- app/views/authors/_author.html.erb -->
+
 <ul>
   <li> <%= @author.name %></li>
   <li> <%= @author.hometown %></li>
@@ -85,7 +91,7 @@ Information About the Post
 <%= @post.content %>
 ```
 
-You can see that the first two lines are exactly the same as the code in our
+You can see that lines 2-5 are exactly the same as the code in our
 authors/author partial.  Let's remove the repetition in our codebase by using
 that partial instead.  By using the partial, our code will look like the
 following:
@@ -127,7 +133,7 @@ Notice a few things:
 
 1. We are no longer passing the render method a `String`; we're passing a `Hash` with two key-value pairs
 2. The first key-value pair tells Rails the name of the partial to render
-3. The second key-value pair points itself _to another `Hash`_. That `Hash` contains a key of `locals` pointing to values that will be assigned to them as local variables _within the partial_.
+3. The second key-value pair points itself _to another `Hash`_. That `locals` `Hash` contains keys whose values will be assigned to them as local variables _within the partial_.
 
 When we use locals, we need to make sure that the variables we refer to in our partial have the same names as the keys in our locals hash.
 
