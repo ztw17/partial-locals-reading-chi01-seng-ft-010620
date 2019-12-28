@@ -1,4 +1,4 @@
-# Partials with Locals 
+# Partials with Locals
 
 ## Objectives
 
@@ -11,15 +11,16 @@
 
 Partials help us break our code up into reusable chunks.  They also often have
 implicit dependencies that can lead to bugs.  For example, what if a partial
-assumes that a `@user` variable is present. If the point is to _reuse_
-partials, if you put it inside of an action that _didn't_ set a `@user`
-variable, you're going to have a bug. Using "locals" in partials is how we can
-make these implicit assumptions explicit.  In the following example, we'll
-unpack exactly what locals are and how they're used.
+assumes that a `@user` variable is present. If the point is to _reuse_ partials,
+if you put it inside of an action that _didn't_ set a `@user` variable, you're
+going to have a bug. Using "locals" in partials is how we can make these
+implicit assumptions explicit.  In the following example, we'll unpack exactly
+what locals are and how they're used.
 
 ## Lesson
 
-Take a look at the included repo.  You should notice the same piece of view code in a few places.
+Take a look at the included repo.  You should notice the same piece of view code
+in a few places.
 
 ```erb
 <ul>
@@ -50,7 +51,7 @@ Let's start with the author show page.  Watch our _process_ here as we're going
 to apply it to all views that reference this `name` and `hometown` information.
 
 Let's remove the code from our `app/views/authors/show.html.erb` page.  Now our
-file should be empty: 
+file should be empty:
 
 ```erb
 <!-- app/views/authors/show.html.erb -->
@@ -112,8 +113,8 @@ Information About the Post
 In `app/views/authors/show.html.erb` our source of information about  `.name`
 and `.hometown` is @author; in `app/views/posts/show.html.erb` the source of
 information about `.name` and `.hometown` is `@post.author`. If we could tell
-the partial "use as your source" `@author` or `@post.author`, we could share
-the partial across these two different views.
+the partial "use as your source" `@author` or `@post.author`, we could share the
+partial across these two different views.
 
 The `locals` parameter to `render` provides this flexibility.
 
@@ -131,13 +132,18 @@ Information About the Post
 
 Notice a few things:
 
-1. We are no longer passing the render method a `String`; we're passing a `Hash` with two key-value pairs
+1. We are no longer passing the render method a `String`; we're passing a `Hash`
+   with two key-value pairs
 2. The first key-value pair tells Rails the name of the partial to render
-3. The second key-value pair points itself _to another `Hash`_. That `locals` `Hash` contains keys whose values will be assigned to them as local variables _within the partial_.
+3. The second key-value pair points itself _to another `Hash`_. That `locals`
+   `Hash` contains keys whose values will be assigned to them as local variables
+   _within the partial_.
 
-When we use locals, we need to make sure that the variables we refer to in our partial have the same names as the keys in our locals hash.
+When we use locals, we need to make sure that the variables we refer to in our
+partial have the same names as the keys in our locals hash.
 
-In our example partial, `app/views/author/_author.html.erb`, we need to change our code from:
+In our example partial, `app/views/author/_author.html.erb`, we need to change
+our code from:
 
 ```erb
 <ul>
@@ -165,8 +171,8 @@ special powers.
 
 Now notice that, if we choose to delete the line `<%= render {partial:
 "authors/author", locals: {post_author: @author}} %>` from the posts/show view,
-calling the partial requires us to pass in data about the author. The `@author
-= @post.author` line in our `PostsController` may no longer be needed.
+calling the partial requires us to pass in data about the author. The `@author =
+@post.author` line in our `PostsController` may no longer be needed.
 
 In fact, with locals, we can completely eliminate the `@author = @post.author`
 line in the `posts#show` controller action, instead only accessing that data
@@ -211,4 +217,3 @@ In this lab we've learned how partials help us DRY out our views and how the
 * [RailsGuide: Partials](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials)
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/partial-locals-reading' title='Partials with Locals'>Partials with Locals</a> on Learn.co and start learning to code for free.</p>
-
