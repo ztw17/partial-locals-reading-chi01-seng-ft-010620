@@ -111,7 +111,7 @@ Information About the Post
 ## The Problem
 
 In `app/views/authors/show.html.erb` our source of information about  `.name`
-and `.hometown` is @author; in `app/views/posts/show.html.erb` the source of
+and `.hometown` is `@author`; in `app/views/posts/show.html.erb` the source of
 information about `.name` and `.hometown` is `@post.author`. If we could tell
 the partial "use as your source" `@author` or `@post.author`, we could share the
 partial across these two different views.
@@ -132,11 +132,10 @@ Information About the Post
 
 Notice a few things:
 
-1. We are no longer passing the render method a `String`; we're passing a `Hash`
-   with two key-value pairs
-2. The first key-value pair tells Rails the name of the partial to render
-3. The second key-value pair points itself _to another `Hash`_. That `locals`
-   `Hash` contains keys whose values will be assigned to them as local variables
+1. We are no longer passing the render method a `String`; we're passing key-value pairs
+2. The first key-value pair tells Rails the name of the partial to render (`"authors/author"`)
+3. The second key-value pair specifies the `locals` as a `Hash`. That
+   `Hash`'s keys (`post_author` here) will be created as local variables
    _within the partial_.
 
 When we use locals, we need to make sure that the variables we refer to in our
@@ -161,13 +160,11 @@ to:
 </ul>
 ```
 
-Again, the way we use locals with a partial is similar to how we pass arguments
+The way we use locals with a partial is similar to how we pass arguments
 into a method.  In the `locals` `Hash`, the `post_author:` key is the argument
-name, and the value of that argument, `@author`, is the corresponding value
+name, and the value of that argument, `@author`, is the value
 stored as `post_author` and passed into the method.  We can name the keys
-whatever we want (and would probably name this one `author` in a real
-application), but here the intent was demonstrating that name of the key has no
-special powers.
+whatever we want.
 
 Now notice that, if we choose to delete the line `<%= render {partial:
 "authors/author", locals: {post_author: @author}} %>` from the posts/show view,
